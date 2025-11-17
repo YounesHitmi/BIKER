@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoutingServer", "RoutingServer\RoutingServer.csproj", "{46FE6FB3-46DF-4F53-BC66-4933ABE12B17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3336FE6-C976-4F8D-9A83-F197146AE30C} = {A3336FE6-C976-4F8D-9A83-F197146AE30C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCacheServ", "ProxyCacheServ\ProxyCacheServ.csproj", "{A3336FE6-C976-4F8D-9A83-F197146AE30C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCacheClient", "ProxyCacheClient\ProxyCacheClient.csproj", "{3882CE28-B849-45A0-AEE6-40B99B863A17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3336FE6-C976-4F8D-9A83-F197146AE30C} = {A3336FE6-C976-4F8D-9A83-F197146AE30C}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46FE6FB3-46DF-4F53-BC66-4933ABE12B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FE6FB3-46DF-4F53-BC66-4933ABE12B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FE6FB3-46DF-4F53-BC66-4933ABE12B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FE6FB3-46DF-4F53-BC66-4933ABE12B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3336FE6-C976-4F8D-9A83-F197146AE30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3336FE6-C976-4F8D-9A83-F197146AE30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3336FE6-C976-4F8D-9A83-F197146AE30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3336FE6-C976-4F8D-9A83-F197146AE30C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3882CE28-B849-45A0-AEE6-40B99B863A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3882CE28-B849-45A0-AEE6-40B99B863A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3882CE28-B849-45A0-AEE6-40B99B863A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3882CE28-B849-45A0-AEE6-40B99B863A17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2795BC81-0A0B-4C2A-93B1-824E4C504FB8}
+	EndGlobalSection
+EndGlobal
