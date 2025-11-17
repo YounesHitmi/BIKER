@@ -1,0 +1,248 @@
+body {
+    display: grid;
+    grid-template-rows: 10vh 80vh 10vh;
+    grid-template-columns: 1fr;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+}
+
+main-navbar {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    display: block;
+    height: 100%;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+main-navbar header {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+main-navbar #logo {
+    height: 50px;
+    width: auto;
+    margin: 10px;
+    grid-column: 1;
+}
+
+main-navbar nav {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22.5rem;
+    padding: 1rem 2rem;
+    height: 100%;
+
+}
+
+main-navbar nav a {
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+main-navbar nav a:hover {
+    color: #007BFF;
+    transform: scale(1.2);
+}
+
+.mBurger {
+    display: none;
+    position: fixed;
+    right: 10px;
+    top: 12px;
+    z-index: 12;
+    cursor: pointer;
+    height: 35px;
+    width: 5.75vw;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mBurger.cross div:nth-child(1) {
+    transform: translateY(200%) rotate(45deg);
+}
+
+.mBurger.cross div:nth-child(2) {
+    opacity: 0;
+}
+
+.mBurger.cross div:nth-child(3) {
+    transform: translateY(-200%) rotate(-45deg);
+}
+
+.mBurger div {
+    transition: all 0.3s ease;
+}
+
+.mBurger > div {
+    border-bottom: 10px solid black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+aside {
+    grid-column: 1;
+    grid-row: 2;
+    border: 1px solid lightgray;
+    padding-left: 20px;
+}
+
+main {
+    grid-column: 1;
+    grid-row: 2;
+    border: 1px solid lightgray;
+    padding-left: 20px;
+}
+
+main h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main-footer {
+    grid-column: 1 / 3;
+    grid-row: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes burgerOut {
+    from { right: 2vw; }
+    to { right: -10vw; }
+}
+
+@keyframes burgerIn {
+    from { right: -10vw; }
+    to { right: 2vw; }
+}
+
+@media screen and (max-width: 1100px) {
+    .mBurger {
+        display: flex;
+        grid-row: 1;
+        grid-column: 1;
+    }
+    main-navbar nav{
+        display: none;
+    }
+
+    main-navbar.mobile {
+        grid-column: 1;
+        grid-row: 1;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 20vw;
+        height: 74vh;
+        bottom :0;
+        padding: 2rem 1rem;
+        animation: slideIn 1s ease-out forwards;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    main-navbar.mobile nav {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    main-navbar.mobile nav a {
+        color: white;
+    }
+
+    main-navbar.mobile nav a :hover{
+        font-size: 2rem;
+    }
+
+    main-navbar.mobile header {
+        margin-top: 5vh;
+        display: block;
+    }
+
+    main-navbar #logo{
+        display: none;
+    }
+
+    body{
+        display: grid;
+        grid-template: 1fr 15vh/ 1fr;
+    }
+
+    aside {
+        display: none;
+        transform: translateX(-100%);
+        position: fixed;
+    }
+
+    main{
+        width: 100%;
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    main-footer{
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background: white;
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    li {
+        padding: 0.5rem;
+        cursor: pointer;
+    }
+
+    li:hover {
+        background-color: #f0f0f0;
+    }
+
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+li {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #f0f0f0;
+}
+
