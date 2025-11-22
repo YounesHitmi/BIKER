@@ -123,6 +123,64 @@ namespace RoutingServer.ContractTypes
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer", IsNullable=true)]
+    public partial class RouteInstruction
+    {
+        
+        private string descriptionField;
+        
+        private double distanceField;
+        
+        private bool distanceFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Description
+        {
+            get
+            {
+                return this.descriptionField;
+            }
+            set
+            {
+                this.descriptionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public double Distance
+        {
+            get
+            {
+                return this.distanceField;
+            }
+            set
+            {
+                this.distanceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DistanceSpecified
+        {
+            get
+            {
+                return this.distanceFieldSpecified;
+            }
+            set
+            {
+                this.distanceFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("MSBuild", "17.14.23+b0019275ecd6d49bb192b2e055849e25419f1010")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer", IsNullable=true)]
     public partial class RouteInfo
     {
         
@@ -135,6 +193,10 @@ namespace RoutingServer.ContractTypes
         private bool durationFieldSpecified;
         
         private string geometryField;
+        
+        private RouteInstruction[] instructionsField;
+        
+        private string profileField;
         
         /// <remarks/>
         public double Distance
@@ -201,6 +263,34 @@ namespace RoutingServer.ContractTypes
             set
             {
                 this.geometryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public RouteInstruction[] Instructions
+        {
+            get
+            {
+                return this.instructionsField;
+            }
+            set
+            {
+                this.instructionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Profile
+        {
+            get
+            {
+                return this.profileField;
+            }
+            set
+            {
+                this.profileField = value;
             }
         }
     }
@@ -572,6 +662,33 @@ namespace RoutingServer.ContractTypes
             set
             {
                 this.getCityFromCoordinatesResultField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("MSBuild", "17.14.23+b0019275ecd6d49bb192b2e055849e25419f1010")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer", IsNullable=true)]
+    public partial class ArrayOfRouteInstruction
+    {
+        
+        private RouteInstruction[] routeInstructionField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("RouteInstruction", IsNullable=true)]
+        public RouteInstruction[] RouteInstruction
+        {
+            get
+            {
+                return this.routeInstructionField;
+            }
+            set
+            {
+                this.routeInstructionField = value;
             }
         }
     }

@@ -5,3 +5,10 @@ C:\Users\youne\source\repos\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheCl
 C:\Users\youne\source\repos\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheClient.csproj.CoreCompileInputs.cache
 C:\Users\youne\source\repos\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheClient.exe
 C:\Users\youne\source\repos\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheClient.pdb
+C:\Users\youne\OneDrive\Bureau\biker\LetsGoBiking\ProxyCacheClient\bin\Debug\ProxyCacheClient.exe.config
+C:\Users\youne\OneDrive\Bureau\biker\LetsGoBiking\ProxyCacheClient\bin\Debug\ProxyCacheClient.exe
+C:\Users\youne\OneDrive\Bureau\biker\LetsGoBiking\ProxyCacheClient\bin\Debug\ProxyCacheClient.pdb
+C:\Users\youne\OneDrive\Bureau\biker\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheClient.csproj.AssemblyReference.cache
+C:\Users\youne\OneDrive\Bureau\biker\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheClient.csproj.CoreCompileInputs.cache
+C:\Users\youne\OneDrive\Bureau\biker\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheClient.exe
+C:\Users\youne\OneDrive\Bureau\biker\LetsGoBiking\ProxyCacheClient\obj\Debug\ProxyCacheClient.pdb

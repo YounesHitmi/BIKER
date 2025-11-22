@@ -92,6 +92,12 @@ namespace RoutingServer.ProxyCacheReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string GeometryField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RoutingServer.ProxyCacheReference.RouteInstruction[] InstructionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ProfileField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -137,6 +143,93 @@ namespace RoutingServer.ProxyCacheReference {
                 if ((object.ReferenceEquals(this.GeometryField, value) != true)) {
                     this.GeometryField = value;
                     this.RaisePropertyChanged("Geometry");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RoutingServer.ProxyCacheReference.RouteInstruction[] Instructions {
+            get {
+                return this.InstructionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InstructionsField, value) != true)) {
+                    this.InstructionsField = value;
+                    this.RaisePropertyChanged("Instructions");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Profile {
+            get {
+                return this.ProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
+                    this.ProfileField = value;
+                    this.RaisePropertyChanged("Profile");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RouteInstruction", Namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer")]
+    [System.SerializableAttribute()]
+    public partial class RouteInstruction : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double DistanceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Distance {
+            get {
+                return this.DistanceField;
+            }
+            set {
+                if ((this.DistanceField.Equals(value) != true)) {
+                    this.DistanceField = value;
+                    this.RaisePropertyChanged("Distance");
                 }
             }
         }

@@ -170,7 +170,7 @@ namespace ProxyCacheServer
                 string startCoord = $"{start.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{start.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
                 string endCoords = $"{end.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{end.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
 
-                string url = $"https://api.openrouteservice.org/v2/directions/{profile}?api_key={ORS_API_KEY}&start={startCoord}&end={endCoords}&geometry_format=polyline";
+                string url = $"https://api.openrouteservice.org/v2/directions/{profile}?api_key={ORS_API_KEY}&start={startCoord}&end={endCoords}&geometry_format=polyline&langage=fr";
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("User-Agent", "Younes-H");
@@ -180,7 +180,7 @@ namespace ProxyCacheServer
                 string jsonResponse = await response.Content.ReadAsStringAsync();
 
                 using (JsonDocument doc = JsonDocument.Parse(jsonResponse))
-                {   
+                {
                     JsonElement root = doc.RootElement;
                     JsonElement features = root.GetProperty("features");
                     if (features.GetArrayLength() == 0) return null;
@@ -194,8 +194,35 @@ namespace ProxyCacheServer
                     double duration = summary.GetProperty("duration").GetDouble();
                     double distance = summary.GetProperty("distance").GetDouble();
 
-                    return new RouteInfo { Duration = duration, Distance = distance, Geometry = geometry };
+                    List<RouteInstruction> instructions = new List<RouteInstruction>();
+                    if (properties.TryGetProperty("segments", out JsonElement segments))
+                    {
+                        foreach (JsonElement segment in segments.EnumerateArray())
+                        {
+                            if (segment.TryGetProperty("steps", out JsonElement steps))
+                            {
+                                foreach (JsonElement step in steps.EnumerateArray())
+                                {
+                                    instructions.Add(new RouteInstruction
+                                    {
+                                        Description = step.GetProperty("instruction").GetString(),
+                                        Distance = step.GetProperty("distance").GetDouble()
+                                    });
+                                }
+                            }
+                        }
+                    }
 
+                    Console.WriteLine($"Instrcution du premier segment : {instructions[0]}\n");
+
+                    return new RouteInfo
+                    {
+                        Duration = duration,
+                        Distance = distance,
+                        Geometry = geometry,
+                        Profile = profile,
+                        Instructions = instructions.ToArray()
+                    };
                 }
             }
             catch (Exception ex)

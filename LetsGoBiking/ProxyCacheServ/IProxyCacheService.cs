@@ -64,6 +64,15 @@ namespace ProxyCacheServer
     }
 
     [DataContract]
+    public class RouteInstruction
+    {
+        [DataMember]
+        public string Description { get; set; }
+        [DataMember]
+        public double Distance { get; set; }
+    }
+
+    [DataContract]
     public class RouteInfo
     {
         [DataMember]
@@ -74,6 +83,12 @@ namespace ProxyCacheServer
 
         [DataMember]
         public string Geometry { get; set; }
+
+        [DataMember]
+        public string Profile { get; set; }
+
+        [DataMember]
+        public RouteInstruction[] Instructions { get; set; }
 
     }
 }

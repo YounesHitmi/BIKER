@@ -13,9 +13,24 @@
       <xs:element minOccurs="0" name="Distance" type="xs:double" />
       <xs:element minOccurs="0" name="Duration" type="xs:double" />
       <xs:element minOccurs="0" name="Geometry" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Instructions" nillable="true" type="tns:ArrayOfRouteInstruction" />
+      <xs:element minOccurs="0" name="Profile" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RouteInfo" nillable="true" type="tns:RouteInfo" />
+  <xs:complexType name="ArrayOfRouteInstruction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RouteInstruction" nillable="true" type="tns:RouteInstruction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRouteInstruction" nillable="true" type="tns:ArrayOfRouteInstruction" />
+  <xs:complexType name="RouteInstruction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Distance" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RouteInstruction" nillable="true" type="tns:RouteInstruction" />
   <xs:complexType name="ArrayOfMyContract">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="MyContract" nillable="true" type="tns:MyContract" />

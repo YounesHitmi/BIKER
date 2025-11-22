@@ -162,25 +162,37 @@ namespace RoutingServer
 
                 double bikeTotalTime = walkToStation.Duration + bikeRide.Duration + walkFromStation.Duration;
                 double walkTotalTime = fullWalk.Duration;
+                double bikeTotalDistance = walkToStation.Distance + bikeRide.Distance + walkFromStation.Distance;
+                double walkTotalDistance = fullWalk.Distance;
 
 
-                if(walkTotalTime <= bikeTotalTime)
+                if (walkTotalTime <= bikeTotalTime)
                 {
                     response.Status = "OK";
-                    response.Message = $"Marche recommandée\n" +
-                        $"Le trajet à pied est plus rapide : env. {Math.Round(walkTotalTime / 60)} min.\n" +
-                        $"En vélo : env. {Math.Round(bikeTotalTime / 60)} min.";
+                    response.Message = "Réponse finale du REST";
+                    response.Mean = "Marche recommandée\n";
+                    response.Time = Math.Round(walkTotalTime / 60);
+                    response.Distance = walkTotalDistance;
+                    response.Comparison = $"🚶 Le trajet à pied est plus rapide : env. {Math.Round(walkTotalTime / 60)} min.\n" +
+                    $"En vélo : env. {Math.Round(bikeTotalTime / 60)} min.\n";
+                    response.Steps = $"Marchez jusqu'à {bestStartStation.name}, \n" +
+                        $"Prenez un vélo jusqu'à {bestEndStation.name}, \n" +
+                        $"Puis marchez jusqu'à {destination}. \n";
+
                     response.Segments = new List<RouteInfo> { fullWalk };
                 }
                 else
                 {
                     response.Status = "OK";
-                    response.Message = $"Vélo recommandée\n" +
-                        $"Le trajet en vélo est plus rapide : env. {Math.Round(bikeTotalTime / 60)} min.\n" +
-                        $"Marchez jusqu'à {bestStartStation.name}, \n" +
+                    response.Message = "Réponse finale du REST";
+                    response.Mean = "Vélo recommandée\n";
+                    response.Time = Math.Round(bikeTotalTime / 60);
+                    response.Distance = bikeTotalDistance;
+                    response.Comparison = $"🚴 Le trajet en vélo est plus rapide : env. {Math.Round(bikeTotalTime / 60)} min.\n" +
+                        $"En faisant le trajet uniquement à pieds : env. {Math.Round(walkTotalTime / 60)} min.\n";
+                    response.Steps = $"Marchez jusqu'à {bestStartStation.name}, \n" +
                         $"Prenez un vélo jusqu'à {bestEndStation.name}, \n" +
-                        $"Puis marchez jusqu'à {destination}, \n" +
-                        $"En faisant le trajet uniquement à pieds : env. {Math.Round(walkTotalTime / 60)} min.";
+                        $"Puis marchez jusqu'à {destination}. \n";
                     response.Segments = new List<RouteInfo> { walkToStation, bikeRide, walkFromStation };
                 }
             }

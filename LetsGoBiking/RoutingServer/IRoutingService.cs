@@ -37,6 +37,36 @@ namespace RoutingServer
         }
 
         [DataMember]
+        public string Mean
+        {
+            get; set;
+        }
+
+        [DataMember]
+        public double Time
+        {
+            get; set;
+        }
+
+        [DataMember]
+        public double Distance
+        {
+            get; set;
+        }
+
+        [DataMember]
+        public string Comparison
+        {
+            get; set;
+        }
+
+        [DataMember]
+        public string Steps
+        {
+            get; set;
+        }
+
+        [DataMember]
         public List<RouteInfo> Segments { get; set; }
 
     }
