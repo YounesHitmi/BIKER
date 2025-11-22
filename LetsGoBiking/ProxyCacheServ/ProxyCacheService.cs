@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Runtime.Caching;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
@@ -170,24 +171,53 @@ namespace ProxyCacheServer
                 string startCoord = $"{start.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{start.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
                 string endCoords = $"{end.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{end.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
 
-                string url = $"https://api.openrouteservice.org/v2/directions/{profile}?api_key={ORS_API_KEY}&start={startCoord}&end={endCoords}&geometry_format=polyline&langage=fr";
+                string url = $"https://api.openrouteservice.org/v2/directions/{profile}";
 
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
-                request.Headers.Add("User-Agent", "Younes-H");
+                //Body
+                var payload = new
+                {
+                    coordinates = new[]
+                    {
+                        new[] {start.Longitude, start.Latitude},
+                        new[] { end.Longitude, end.Latitude}
+                    },
+                    language = "fr",
+                    instructions = true,
+                    units = "m",
+                    geometry = true
+                };
+
+                string jsonPayload = JsonSerializer.Serialize(payload);
+                StringContent content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+                request.Content = content;
+
+                //Header
+                request.Headers.TryAddWithoutValidation("Authorization", ORS_API_KEY); 
+                request.Headers.UserAgent.ParseAdd("Younes-H");
 
                 HttpResponseMessage response = await httpClient.SendAsync(request);
-                if (!response.IsSuccessStatusCode) return null;
+
+                if(!response.IsSuccessStatusCode)
+                {
+                    string errorBody = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"ERREUR POST CallRouteApi ({response.StatusCode}): {errorBody}");
+                    return null;
+                }
+
                 string jsonResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(jsonResponse);
 
                 using (JsonDocument doc = JsonDocument.Parse(jsonResponse))
                 {
                     JsonElement root = doc.RootElement;
-                    JsonElement features = root.GetProperty("features");
+                    JsonElement features = root.GetProperty("routes");
                     if (features.GetArrayLength() == 0) return null;
 
                     JsonElement firstRoute = features[0];
-                    JsonElement properties = firstRoute.GetProperty("properties");
-                    JsonElement summary = properties.GetProperty("summary");
+                    //JsonElement properties = firstRoute.GetProperty("properties");
+                    JsonElement summary = firstRoute.GetProperty("summary");
 
                     JsonElement geometryElement = firstRoute.GetProperty("geometry");
                     string geometry = geometryElement.ToString();
@@ -195,7 +225,7 @@ namespace ProxyCacheServer
                     double distance = summary.GetProperty("distance").GetDouble();
 
                     List<RouteInstruction> instructions = new List<RouteInstruction>();
-                    if (properties.TryGetProperty("segments", out JsonElement segments))
+                    if (firstRoute.TryGetProperty("segments", out JsonElement segments))
                     {
                         foreach (JsonElement segment in segments.EnumerateArray())
                         {
@@ -206,7 +236,8 @@ namespace ProxyCacheServer
                                     instructions.Add(new RouteInstruction
                                     {
                                         Description = step.GetProperty("instruction").GetString(),
-                                        Distance = step.GetProperty("distance").GetDouble()
+                                        Distance = step.GetProperty("distance").GetDouble(),
+                                        Type = step.GetProperty("type").GetInt32()
                                     });
                                 }
                             }

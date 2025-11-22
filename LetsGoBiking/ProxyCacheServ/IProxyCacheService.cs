@@ -70,6 +70,8 @@ namespace ProxyCacheServer
         public string Description { get; set; }
         [DataMember]
         public double Distance { get; set; }
+        [DataMember]
+        public int Type { get; set; }
     }
 
     [DataContract]

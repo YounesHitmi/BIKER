@@ -28,6 +28,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Distance" type="xs:double" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RouteInstruction" nillable="true" type="tns:RouteInstruction" />

@@ -132,6 +132,10 @@ namespace RoutingServer.ContractTypes
         
         private bool distanceFieldSpecified;
         
+        private int typeField;
+        
+        private bool typeFieldSpecified;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string Description
@@ -170,6 +174,33 @@ namespace RoutingServer.ContractTypes
             set
             {
                 this.distanceFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int Type
+        {
+            get
+            {
+                return this.typeField;
+            }
+            set
+            {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TypeSpecified
+        {
+            get
+            {
+                return this.typeFieldSpecified;
+            }
+            set
+            {
+                this.typeFieldSpecified = value;
             }
         }
     }

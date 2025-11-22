@@ -198,6 +198,9 @@ namespace RoutingServer.ProxyCacheReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double DistanceField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TypeField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -230,6 +233,19 @@ namespace RoutingServer.ProxyCacheReference {
                 if ((this.DistanceField.Equals(value) != true)) {
                     this.DistanceField = value;
                     this.RaisePropertyChanged("Distance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
