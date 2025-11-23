@@ -43,6 +43,7 @@ namespace RoutingServer
                 }
 
                 List<MyContract> contracts = proxyClient.GetContracts().ToList();
+
                 List<string> villes =
                 contracts
                   .Where(c => c.cities != null)
@@ -51,11 +52,11 @@ namespace RoutingServer
                   .ToList();
 
                 string userCity = proxyClient.GetCityFromCoordinates(originCoord);
-                if (!villes.Contains(userCity)) {
+                /*if (!villes.Contains(userCity)) {
                     response.Status = "ERREUR";
                     response.Message = "Votre ville n'est pas couverte par le service JCDecaux.";
 
-                }
+                }*/
                 if (string.IsNullOrEmpty(userCity))
                 {
                     response.Status = "ERREUR";
@@ -63,12 +64,10 @@ namespace RoutingServer
                     return response;
                 }
 
-
                 string userContractName = contracts
                     .FirstOrDefault(c => c.name.Equals(userCity, StringComparison.OrdinalIgnoreCase) ||
                                          c.commercial_name != null && c.commercial_name.Equals(userCity, StringComparison.OrdinalIgnoreCase))
                     ?.name;
-
                 if (string.IsNullOrEmpty(userContractName))
                 {
                     userContractName = contracts
@@ -76,67 +75,38 @@ namespace RoutingServer
                         ?.name;
                 }
 
-
-                Console.WriteLine("\n\n                    //LOG DEBUG//                       \n\n");
-                Console.WriteLine($"Ville du trajet : {userCity}");
-                Console.WriteLine($"Coordonnées origine: Lat={originCoord.Latitude}, Lon={originCoord.Longitude}");
-                Console.WriteLine($"Adresse origine: {origin}");
-                Console.WriteLine($"Coordonnées destination: Lat={destCoord.Latitude}, Lon={destCoord.Longitude}");
-                Console.WriteLine($"Adresse destination: {destination}\n");
-                
-
-                string stationsJson = proxyClient.GetStationsForContract(userContractName);
-                if (string.IsNullOrEmpty(stationsJson))
-                {
-                    response.Status = "ERREUR";
-                    response.Message = $"Impossible de récupérer la liste globale des stations JCDecaux pour {userContractName}.";
-                    return response;
-                }
+                string allStationsJson = proxyClient.GetAllStations();
+                JsonSerializerOptions options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                List<Station> allStations = JsonSerializer.Deserialize<List<Station>>(allStationsJson, options);
 
                 //Conversion des objets MyGeoCoordinate en GeoCoordinate (pour calculs de distances)
                 GeoCoordinate originGeo = new GeoCoordinate(originCoord.Latitude, originCoord.Longitude);
                 GeoCoordinate destGeo = new GeoCoordinate(destCoord.Latitude, destCoord.Longitude);
 
-                JsonSerializerOptions options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                List<Station> stations = JsonSerializer.Deserialize<List<Station>>(stationsJson, options);
-
-                if (stations == null || stations.Count == 0)
-                {
-                    response.Status = "ERREUR";
-                    response.Message = $"Aucune station disponible pour le contrat {userContractName}.";
-                    return response;
-                }
-
-
-                Station bestStartStation = stations
-                    .Where(s => s.status == "OPEN" && s.available_bikes > 0 && s.position != null)
+                Station bestStartStation = allStations
+                    .Where(s=> s.status == "OPEN" && s.available_bikes > 0 && s.position != null)
                     .OrderBy(s =>
                         new GeoCoordinate(s.position.lat, s.position.lng)
                         .GetDistanceTo(originGeo)
                     )
                     .FirstOrDefault();
-                if (bestStartStation == null)
-                {
-                    response.Status = "ERREUR";
-                    response.Message = "Impossible de trouver une station de départ pour l'itinéraire choisi.";
-                    return response;
-                }
-                Console.WriteLine($"Prendre un vélo à la station : {bestStartStation.name} à {new GeoCoordinate(bestStartStation.position.lat, bestStartStation.position.lng).GetDistanceTo(originGeo)} m");
 
-                Station bestEndStation = stations
-                    .Where(s => s != bestStartStation && s.status == "OPEN" && s.available_bike_stands > 0 && s.position != null)
+                Station bestEndStation = allStations
+                    .Where(s => s.status == "OPEN" && s.available_bike_stands > 0 && s.position != null)
                     .OrderBy(s =>
                         new GeoCoordinate(s.position.lat, s.position.lng)
                         .GetDistanceTo(destGeo)
                     )
                     .FirstOrDefault();
-                if (bestEndStation == null)
-                {
-                    response.Status = "ERREUR";
-                    response.Message = "Impossible de trouver une station d'arrivée pour l'itinéraire choisi.";
-                    return response;
-                }                
-                Console.WriteLine($"Se garer à la station : {bestEndStation.name} à {new GeoCoordinate(bestEndStation.position.lat, bestEndStation.position.lng).GetDistanceTo(destGeo)} m");
+
+
+                /*Console.WriteLine("\n\n                    //LOG DEBUG//                       \n\n");
+                Console.WriteLine($"Ville du trajet : {userCity}");
+                Console.WriteLine($"Coordonnées origine: Lat={originCoord.Latitude}, Lon={originCoord.Longitude}");
+                Console.WriteLine($"Adresse origine: {origin}");
+                Console.WriteLine($"Coordonnées destination: Lat={destCoord.Latitude}, Lon={destCoord.Longitude}");
+                Console.WriteLine($"Adresse destination: {destination}\n");*/
+
 
                 MyGeoCoordinate startStationCoord = new MyGeoCoordinate { Latitude = bestStartStation.position.lat, Longitude = bestStartStation.position.lng };
                 MyGeoCoordinate endStationCoord = new MyGeoCoordinate { Latitude = bestEndStation.position.lat, Longitude = bestEndStation.position.lng };

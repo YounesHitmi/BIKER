@@ -55,7 +55,7 @@ namespace ProxyCacheServer
                 string url = $"https://api.jcdecaux.com/vls/v1/stations?contract={contract}&apiKey={JCDecauxApiKey}";
 
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
-                HttpResponseMessage response = await httpClient.SendAsync(request); //attends la réponse pour la retourner
+                HttpResponseMessage response = await httpClient.SendAsync(request); 
 
                 if (!response.IsSuccessStatusCode) return null;
                 return await response.Content.ReadAsStringAsync();
