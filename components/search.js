@@ -12,19 +12,22 @@ class Itinerary extends HTMLElement {
           <style>
             #searchButton {
                 background-color: #51f770;
+                background: linear-gradient(135deg, #51f770, #28ba65ff);
                 color: #03001d;
                 border: none;
-                border-radius: 10px;
+                border-radius: 999px;
                 cursor: pointer;
                 font-size: 1rem;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
                 padding: 1rem;
                 font-family: 'Poppins', sans-serif;
                 width: fit-content;
+                margin-top: 2vh;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             }
             
             #searchButton:hover {
-                transform: scale(1.05);
+                transform: translateY(-2px);
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             }
             
@@ -33,6 +36,10 @@ class Itinerary extends HTMLElement {
               flex-direction: column;
               align-items: center;
               gap: 2vh;
+            }
+
+            input{
+                background-color: #f2f4f7;
             }
             
             #start, #end{
@@ -44,6 +51,7 @@ class Itinerary extends HTMLElement {
               padding: 1rem;
               border-radius: 10px;
               border: 1px solid gray;
+              opacity: 0.7;
               transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
             

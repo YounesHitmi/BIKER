@@ -1,24 +1,15 @@
-@echo off
-title Serveur Frontend (Python)
+@ECHO OFF
+TITLE Front-End (Serveur Local)
 
-echo Lancement du serveur web Python...
+ECHO Lancement du serveur web Python sur http://localhost:8000
 
-:: Se place dans le dossier ou se trouve ce script
-cd /d "%~dp0"
+CD /D "%~dp0"
 
-echo.
-echo Le serveur est en cours d'execution.
-echo Ouvrez votre navigateur et allez a :
-echo.
-echo http://localhost:8000/homepage/homepage.html
-echo.
-echo CETTE FENETRE DOIT RESTER OUVERTE.
-echo Appuyez sur Ctrl+C pour arreter le serveur.
-echo.
+ECHO Le serveur est en cours d'execution dans ce terminal.
+ECHO Appuyez sur CTRL+C pour l'arreter.
+ECHO.
+
+REM Ouvre le navigateur par defaut sur la bonne page
+START http://localhost:8000/homepage/homepage.html
 
 python -m http.server 8000
-
-:: Si Python 3 n'est pas trouve, essaie avec Python 2
-python -m SimpleHTTPServer 8000
-
-pause

@@ -1,18 +1,19 @@
 body {
+    background-image: url('../resources/backgroundIti.png');
+    background-size: cover; 
+    background-position: center;
     display: grid;
     grid-template-rows: 10vh 80vh 10vh;
     grid-template-columns: 17vw 1fr;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     height: 100vh;
-    overflow: hidden;
 }
 
 .change{
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top:25%;
 }
 
 .change h2{
@@ -28,26 +29,25 @@ body {
     width: 40vw;
 }
 
-.list-details{
-    margin-top: 5vh;
-    display: flex;
-    flex-direction: column;
-    gap: 0.05vh;
-    justify-content: center;
+.list-details {
+    margin-top: 1.5vh;
+    display: block; 
     width: 10vw;
     max-height: 50vh;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    border-radius: 10px;
 }
 
-.list-details p{
+.list-details p {
     font-size: 0.80em;
-    border : 3px solid lightgray;
+    border: 3px solid lightgray;
+    background-color: #ffffff;
     border-radius: 5px;
     padding: 0.25em;
     transition: transform 0.7s ease, box-shadow 0.3s ease;
+    margin-top: 0; 
+    margin-bottom: 2vh; 
 }
 
 
@@ -56,26 +56,69 @@ body {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 }
 
-.box-details{
+.box-details {
     margin-top: 5vh;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    justify-content: center;
+    display: block;
     width: 95%;
     max-height: 50vh;
     overflow-y: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
     border-radius: 10px;
+    box-shadow: 0 16px 40px 8px rgba(0,0,0,0.3);
 }
 
+.details{
+    z-index: 1;
+    margin-left: 2vw;   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-.box-details h4{
+.box-details h4 {
     padding: 1vw;
     background-color: #efefef;
     border-bottom: 0.1vw solid #cfcfcf;
-    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5vw;
+    margin-top: 0;
+}
+
+#notification{
+    z-index: 2;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    width: 40%;
+    height: 15%;
+    margin-top: 65vh;
+}
+
+.notification-toast {
+    padding: 15px;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(100%);
+    animation: slideInToast 0.5s forwards;
+    cursor: pointer;
+}
+
+@keyframes slideInToast {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.notification-hide {
+    animation: slideOutToast 0.5s forwards;
+}
+
+@keyframes slideOutToast {
+    to { opacity: 0; transform: translateY(100%); }
 }
 
 .box-details h4:hover{
@@ -83,13 +126,17 @@ body {
 }
 
 .road{
-    z-index: 100;
+    z-index: 0;
     height: 57vh;
-    width: 40vw;
+    width: 100%;
+    height: 100%;
+    grid-column: 1/3;
+    grid-row: 1/3;
 }
 
 #biker-title{
     margin-bottom: 0;
+    margin-top: 0;
 }
 
 .change itinerary-component{
@@ -100,53 +147,9 @@ body {
     width: 10vw;
 }
 
-main-navbar {
-    grid-column: 1 / 3;
-    grid-row: 1;
-    display: block;
-    height: 100%;
-}
-
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
-}
-
-main-navbar header {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-}
-
-main-navbar #logo {
-    height: 50px;
-    width: auto;
-    margin: 10px;
-    grid-column: 1;
-}
-
-main-navbar nav {
-    grid-column: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 22.5rem;
-    padding: 1rem 2rem;
-    height: 100%;
-
-}
-
-main-navbar nav a {
-    text-decoration: none;
-    color: black;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-main-navbar nav a:hover {
-    color: #007BFF;
-    transform: scale(1.2);
 }
 
 .mBurger {
@@ -185,20 +188,56 @@ main-navbar nav a:hover {
 }
 
 .infos{
+    z-index: 1;
     width : 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.infos h2{
+    margin-bottom: 0;
+}
+
+
 aside {
+    margin-top: 12vh;
+    margin-left: 1vw;
     grid-column: 1;
     grid-row: 2;
-    background-color: rgba(241, 241, 241, 0.5);
+    background-color: rgb(255, 255, 255);
+    border: #cfcfcf 1px solid;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    height: fit-content;
+    z-index: 1;
 }
 
 main {
     display: flex;
     flex-direction: row;
-    justify-self: center;
-    gap: 2vw;
+    justify-content: space-between;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.leaflet-control-zoom {
+    top: 9vh !important;
+}
+
+
+main-navbar {
+    grid-column: 1/3;
+    grid-row: 1;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: fit-content;
+    z-index: 1;
+}
+
+main-navbar nav a{
+    color: black;
 }
 
 main-footer {
@@ -207,6 +246,7 @@ main-footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 @keyframes burgerOut {

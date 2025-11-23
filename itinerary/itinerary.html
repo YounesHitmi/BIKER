@@ -8,6 +8,28 @@
 
 <body>
 <main-navbar></main-navbar>
+<main>
+    <div class="details">
+        <h2>Infos utiles</h2>
+        <div class="list-details">
+            <p id="time"></p>
+            <p id="distance"></p>
+            <p id="comparaison"></p>
+            <p id="etapes"></p>
+        </div>
+    </div>
+
+    <div id="notification"></div>
+
+    <div class="infos">
+        <h2>Étapes du trajet</h2>
+        <div class="box-details">
+        </div>
+    </div>
+
+</main>
+<div class="road" id="map"></div>
+
 
 <div class="mBurger">
     <div></div>
@@ -22,39 +44,6 @@
     </div>
 </aside>
 
-<main>
-    <div class="details">
-        <div class="list-details">
-            <p id="arrival">Arrivée à 10:49</p>
-            <p id="time">Temps : 17 min</p>
-            <p id="distance">Distance : 9.3 Km</p>
-            <p id="traffic">Circulation fluide compte tenu du traffic actuel.</p>
-            <p id="fuel">Consommation d'essence : 0.5L, soit 0.93€ environ</p>
-        </div>
-    </div>
-
-    <div class="result">
-        <h2 id="biker-title">BIKER Maps</h2>
-        <h2>Votre itinéraire</h2>
-        <div class="road" id="map"></div>
-    </div>
-
-    <div class="infos">
-        <h2>Étapes du trajet</h2>
-        <div class="box-details">
-            <h4>Démarrez sur Rue Saint-Sébastien en direction de l’est.</h4>
-            <h4>Tournez à droite dans 100 mètres sur Rue de la Calade.</h4>
-            <h4>Continuez tout droit pendant 300 mètres, puis prenez légèrement à gauche pour rejoindre Chemin Neuf.</h4>
-            <h4>Au rond-point, prenez la 2ᵉ sortie sur Route de la Mer.</h4>
-            <h4>Après 1,2 km, tournez à gauche sur Avenue des Frères Roustan.</h4>
-            <h4>Suivez cette avenue pendant 2 km, en longeant le bord de mer.</h4>
-            <h4>Tournez à droite au feu sur Boulevard Charles Guillaumont.</h4>
-            <h4>Dans 500 mètres, vous êtes arrivé à Plage de Juan-les-Pins. Le parking se trouve sur votre gauche.</h4>
-        </div>
-    </div>
-
-</main>
-
 <main-footer></main-footer>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -65,6 +54,8 @@
 <script src="../components/footer.js" defer></script>
 <script src="../components/main-navbar.js" defer></script>
 <script src="../components/search.js" defer></script>
+<script src="https://unpkg.com/@mapbox/polyline"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 </body>
 </html>
