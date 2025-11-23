@@ -26,6 +26,14 @@ namespace RoutingServer
                 EndpointAddress endpoint = new EndpointAddress("http://localhost:8733/ProxyCacheServ/");
                 ProxyCacheServiceClient proxyClient = new ProxyCacheServiceClient(binding, endpoint);
 
+                if (WebOperationContext.Current != null) //Pour CORS
+                {
+                    WebOperationContext.Current.OutgoingResponse.Headers.Add(
+                        "Access-Control-Allow-Origin",
+                        "*"
+                    );
+                }
+
                 MyGeoCoordinate originCoord = proxyClient.GetCoordinates(origin);
                 if (originCoord == null)
                 {
@@ -131,7 +139,22 @@ namespace RoutingServer
                 double bikeTotalDistance = walkToStation.Distance + bikeRide.Distance + walkFromStation.Distance;
                 double walkTotalDistance = fullWalk.Distance;
 
+                if (bestStartStation.contract_name != bestEndStation.contract_name)
+                {
+                    response.Status = "OK";
+                    response.Message = "Réponse finale du REST";
+                    response.Mean = "Marche obligatoire\n";
+                    response.Time = Math.Round(walkTotalTime / 60);
+                    response.Distance = walkTotalDistance;
+                    response.Comparison = $"🚶 Le trajet à pied est la seule option. Le départ et l'arrivée n'ont pas le même contrat. Temps total du trajet : env. {Math.Round(walkTotalTime / 60)} min.\n" +
+                    $"En vélo : env. {Math.Round(bikeTotalTime / 60)} min.\n";
+                    response.Steps = $"Marchez jusqu'à {bestStartStation.name}, \n" +
+                        $"Prenez un vélo jusqu'à {bestEndStation.name}, \n" +
+                        $"Puis marchez jusqu'à {destination}. \n";
 
+                    response.Segments = new List<RouteInfo> { fullWalk };
+                    return response;
+                }
                 if (walkTotalTime <= bikeTotalTime)
                 {
                     response.Status = "OK";
@@ -162,19 +185,13 @@ namespace RoutingServer
                     response.Segments = new List<RouteInfo> { walkToStation, bikeRide, walkFromStation };
                 }
             }
+
             catch (Exception e)
             {
                 response.Status = "ERREUR";
                 response.Message = "Une erreur est survenue : " + e.Message;
             }
 
-            if (WebOperationContext.Current != null) 
-            {
-                WebOperationContext.Current.OutgoingResponse.Headers.Add(
-                    "Access-Control-Allow-Origin",
-                    "*" 
-                );
-            }
             return response;
         }
 
