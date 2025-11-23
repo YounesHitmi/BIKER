@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCacheClient", "ProxyCa
 		{A3336FE6-C976-4F8D-9A83-F197146AE30C} = {A3336FE6-C976-4F8D-9A83-F197146AE30C}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService", "NotificationService\NotificationService.csproj", "{D2A4AB16-53F9-4DE0-84D9-D50935B38F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3882CE28-B849-45A0-AEE6-40B99B863A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3882CE28-B849-45A0-AEE6-40B99B863A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3882CE28-B849-45A0-AEE6-40B99B863A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2A4AB16-53F9-4DE0-84D9-D50935B38F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A4AB16-53F9-4DE0-84D9-D50935B38F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A4AB16-53F9-4DE0-84D9-D50935B38F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A4AB16-53F9-4DE0-84D9-D50935B38F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

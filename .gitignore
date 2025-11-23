@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Builds
+bin/
+obj/
+Debug/
+Release/
+
+# Rider
+.idea/
+
+# VS cache files
+*.vsidx
+
+# Logs
+*.log

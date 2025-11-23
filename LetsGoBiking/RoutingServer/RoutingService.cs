@@ -20,15 +20,12 @@ namespace RoutingServer
 
             try
             {
-                
-                //On lie notre RESTE au SOAP
                 WSHttpBinding binding = new WSHttpBinding();
                 binding.MaxReceivedMessageSize = 2147483647;
-                binding.ReaderQuotas.MaxStringContentLength = 2147483647; //Sinon erreur de taille
+                binding.ReaderQuotas.MaxStringContentLength = 2147483647;
                 EndpointAddress endpoint = new EndpointAddress("http://localhost:8733/ProxyCacheServ/");
                 ProxyCacheServiceClient proxyClient = new ProxyCacheServiceClient(binding, endpoint);
 
-                //On traduit nos adresses (string) en objets MyGeoCoordinate
                 MyGeoCoordinate originCoord = proxyClient.GetCoordinates(origin);
                 if (originCoord == null)
                 {
@@ -112,12 +109,12 @@ namespace RoutingServer
 
 
                 Station bestStartStation = stations
-                    .Where(s => s.status == "OPEN" && s.available_bikes > 0 && s.position != null) //filtrage par vélos dispos
+                    .Where(s => s.status == "OPEN" && s.available_bikes > 0 && s.position != null)
                     .OrderBy(s =>
                         new GeoCoordinate(s.position.lat, s.position.lng)
-                        .GetDistanceTo(originGeo) // Calcule la distance de chaque station à l'origine
+                        .GetDistanceTo(originGeo)
                     )
-                    .FirstOrDefault(); //Prend la première de la liste donc la plus proche de la loc d'origine
+                    .FirstOrDefault();
                 if (bestStartStation == null)
                 {
                     response.Status = "ERREUR";
@@ -127,10 +124,10 @@ namespace RoutingServer
                 Console.WriteLine($"Prendre un vélo à la station : {bestStartStation.name} à {new GeoCoordinate(bestStartStation.position.lat, bestStartStation.position.lng).GetDistanceTo(originGeo)} m");
 
                 Station bestEndStation = stations
-                    .Where(s => s != bestStartStation && s.status == "OPEN" && s.available_bike_stands > 0 && s.position != null) //filtrage par places de stationnement dispos à l'arv.
+                    .Where(s => s != bestStartStation && s.status == "OPEN" && s.available_bike_stands > 0 && s.position != null)
                     .OrderBy(s =>
                         new GeoCoordinate(s.position.lat, s.position.lng)
-                        .GetDistanceTo(destGeo) // Calcule la distance de chaque station à la destination
+                        .GetDistanceTo(destGeo)
                     )
                     .FirstOrDefault();
                 if (bestEndStation == null)
@@ -141,7 +138,6 @@ namespace RoutingServer
                 }                
                 Console.WriteLine($"Se garer à la station : {bestEndStation.name} à {new GeoCoordinate(bestEndStation.position.lat, bestEndStation.position.lng).GetDistanceTo(destGeo)} m");
 
-                //Calcul des temps de trajet
                 MyGeoCoordinate startStationCoord = new MyGeoCoordinate { Latitude = bestStartStation.position.lat, Longitude = bestStartStation.position.lng };
                 MyGeoCoordinate endStationCoord = new MyGeoCoordinate { Latitude = bestEndStation.position.lat, Longitude = bestEndStation.position.lng };
 
@@ -202,12 +198,11 @@ namespace RoutingServer
                 response.Message = "Une erreur est survenue : " + e.Message;
             }
 
-            // On ajoute l'en-tête CORS pour autoriser les appels depuis un navigateur
             if (WebOperationContext.Current != null) 
             {
                 WebOperationContext.Current.OutgoingResponse.Headers.Add(
                     "Access-Control-Allow-Origin",
-                    "*" // Autorise tout le monde (pour le test)
+                    "*" 
                 );
             }
             return response;

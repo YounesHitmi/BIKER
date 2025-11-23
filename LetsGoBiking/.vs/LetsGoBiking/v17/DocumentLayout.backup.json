@@ -3,7 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A3336FE6-C976-4F8D-9A83-F197146AE30C}|ProxyCacheServ\\ProxyCacheServ.csproj|C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\proxycacheserv\\iproxycacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D2A4AB16-53F9-4DE0-84D9-D50935B38F7D}|NotificationService\\NotificationService.csproj|c:\\users\\youne\\onedrive\\bureau\\biker\\letsgobiking\\notificationservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2A4AB16-53F9-4DE0-84D9-D50935B38F7D}|NotificationService\\NotificationService.csproj|solutionrelative:notificationservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3336FE6-C976-4F8D-9A83-F197146AE30C}|ProxyCacheServ\\ProxyCacheServ.csproj|c:\\users\\youne\\onedrive\\bureau\\biker\\letsgobiking\\proxycacheserv\\iproxycacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3336FE6-C976-4F8D-9A83-F197146AE30C}|ProxyCacheServ\\ProxyCacheServ.csproj|solutionrelative:proxycacheserv\\iproxycacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,11 +19,11 @@
       "RelativeMoniker": "D:0:0:{46FE6FB3-46DF-4F53-BC66-4933ABE12B17}|RoutingServer\\RoutingServer.csproj|solutionrelative:routingserver\\iroutingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3336FE6-C976-4F8D-9A83-F197146AE30C}|ProxyCacheServ\\ProxyCacheServ.csproj|c:\\users\\youne\\onedrive\\bureau\\biker\\letsgobiking\\proxycacheserv\\proxycacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A3336FE6-C976-4F8D-9A83-F197146AE30C}|ProxyCacheServ\\ProxyCacheServ.csproj|C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\proxycacheserv\\proxycacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3336FE6-C976-4F8D-9A83-F197146AE30C}|ProxyCacheServ\\ProxyCacheServ.csproj|solutionrelative:proxycacheserv\\proxycacheservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3882CE28-B849-45A0-AEE6-40B99B863A17}|ProxyCacheClient\\ProxyCacheClient.csproj|c:\\users\\youne\\onedrive\\bureau\\biker\\letsgobiking\\proxycacheclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3882CE28-B849-45A0-AEE6-40B99B863A17}|ProxyCacheClient\\ProxyCacheClient.csproj|C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\proxycacheclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3882CE28-B849-45A0-AEE6-40B99B863A17}|ProxyCacheClient\\ProxyCacheClient.csproj|solutionrelative:proxycacheclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -42,11 +46,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\NotificationService\\Program.cs",
+              "RelativeDocumentMoniker": "NotificationService\\Program.cs",
+              "ToolTip": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\NotificationService\\Program.cs",
+              "RelativeToolTip": "NotificationService\\Program.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAQwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-23T17:14:47.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IProxyCacheService.cs",
+              "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\ProxyCacheServ\\IProxyCacheService.cs",
+              "RelativeDocumentMoniker": "ProxyCacheServ\\IProxyCacheService.cs",
+              "ToolTip": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\ProxyCacheServ\\IProxyCacheService.cs",
+              "RelativeToolTip": "ProxyCacheServ\\IProxyCacheService.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAowFMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-17T08:27:39.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\ProxyCacheClient\\Program.cs",
               "RelativeDocumentMoniker": "ProxyCacheClient\\Program.cs",
@@ -59,7 +89,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ProxyCacheService.cs",
               "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\ProxyCacheServ\\ProxyCacheService.cs",
               "RelativeDocumentMoniker": "ProxyCacheServ\\ProxyCacheService.cs",
@@ -72,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "RoutingService.cs",
               "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\RoutingServer\\RoutingService.cs",
               "RelativeDocumentMoniker": "RoutingServer\\RoutingService.cs",
@@ -84,25 +114,12 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IProxyCacheService.cs",
-              "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\ProxyCacheServ\\IProxyCacheService.cs",
-              "RelativeDocumentMoniker": "ProxyCacheServ\\IProxyCacheService.cs",
-              "ToolTip": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\ProxyCacheServ\\IProxyCacheService.cs",
-              "RelativeToolTip": "ProxyCacheServ\\IProxyCacheService.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAswFMAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T08:27:39.634Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "IRoutingService.cs",
               "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\RoutingServer\\IRoutingService.cs",
               "RelativeDocumentMoniker": "RoutingServer\\IRoutingService.cs",
@@ -115,7 +132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\RoutingServer\\App.config",
               "RelativeDocumentMoniker": "RoutingServer\\App.config",
@@ -128,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\RoutingServer\\Program.cs",
               "RelativeDocumentMoniker": "RoutingServer\\Program.cs",
@@ -136,11 +153,12 @@
               "RelativeToolTip": "RoutingServer\\Program.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T18:32:34.013Z"
+              "WhenOpened": "2025-11-17T18:32:34.013Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\youne\\OneDrive\\Bureau\\biker\\LetsGoBiking\\ProxyCacheServ\\Program.cs",
               "RelativeDocumentMoniker": "ProxyCacheServ\\Program.cs",
@@ -148,7 +166,8 @@
               "RelativeToolTip": "ProxyCacheServ\\Program.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-13T08:32:48.004Z"
+              "WhenOpened": "2025-11-13T08:32:48.004Z",
+              "EditorCaption": ""
             }
           ]
         }
