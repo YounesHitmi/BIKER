@@ -16,9 +16,6 @@ namespace ProxyCacheServer
     public interface IProxyCacheService
     {
         [OperationContract]
-        string GetStationsForContract(String contract);
-
-        [OperationContract]
         MyGeoCoordinate GetCoordinates(string address);
 
         [OperationContract]
@@ -27,29 +24,6 @@ namespace ProxyCacheServer
         [OperationContract]
         string GetAllStations();
 
-        [OperationContract]
-        List<MyContract> GetContracts();
-
-        [OperationContract]
-        string GetCityFromCoordinates(MyGeoCoordinate coord);
-
-
-    }
-
-    [DataContract]
-    public class MyContract
-    {
-        [DataMember]
-        public string name { get; set; }
-
-        [DataMember]
-        public string commercial_name { get; set; }
-
-        [DataMember]
-        public string country_code { get; set; }
-
-        [DataMember]
-        public List<string> cities { get; set; }
     }
 
 

@@ -43,13 +43,13 @@ namespace RoutingServer
         }
 
         [DataMember]
-        public double Time
+        public string Time
         {
             get; set;
         }
 
         [DataMember]
-        public double Distance
+        public string Distance
         {
             get; set;
         }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="RoutingService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/RoutingServer" />
+      <xs:element name="FindItinerary">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="origin" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="destination" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="FindItineraryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/RoutingServer" minOccurs="0" name="FindItineraryResult" nillable="true" type="q1:ItineraryResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RoutingServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RoutingServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer" />
+      <xs:complexType name="ItineraryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Comparison" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Distance" type="xs:double" />
+          <xs:element minOccurs="0" name="Mean" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ProxyCacheServer" minOccurs="0" name="Segments" nillable="true" type="q1:ArrayOfRouteInfo" />
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Steps" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Time" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ItineraryResponse" nillable="true" type="tns:ItineraryResponse" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ProxyCacheServer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ProxyCacheServer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfRouteInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="RouteInfo" nillable="true" type="tns:RouteInfo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfRouteInfo" nillable="true" type="tns:ArrayOfRouteInfo" />
+      <xs:complexType name="RouteInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Distance" type="xs:double" />
+          <xs:element minOccurs="0" name="Duration" type="xs:double" />
+          <xs:element minOccurs="0" name="Geometry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Instructions" nillable="true" type="tns:ArrayOfRouteInstruction" />
+          <xs:element minOccurs="0" name="Profile" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="RouteInfo" nillable="true" type="tns:RouteInfo" />
+      <xs:complexType name="ArrayOfRouteInstruction">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="RouteInstruction" nillable="true" type="tns:RouteInstruction" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfRouteInstruction" nillable="true" type="tns:ArrayOfRouteInstruction" />
+      <xs:complexType name="RouteInstruction">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Distance" type="xs:double" />
+          <xs:element minOccurs="0" name="Type" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="RouteInstruction" nillable="true" type="tns:RouteInstruction" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IRoutingService_FindItinerary_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindItinerary" />
+  </wsdl:message>
+  <wsdl:message name="IRoutingService_FindItinerary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindItineraryResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRoutingService">
+    <wsdl:operation name="FindItinerary">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoutingService/FindItinerary" message="tns:IRoutingService_FindItinerary_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoutingService/FindItineraryResponse" message="tns:IRoutingService_FindItinerary_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRoutingService" type="tns:IRoutingService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FindItinerary">
+      <soap:operation soapAction="http://tempuri.org/IRoutingService/FindItinerary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RoutingService">
+    <wsdl:port name="BasicHttpBinding_IRoutingService" binding="tns:BasicHttpBinding_IRoutingService">
+      <soap:address location="http://localhost:8734/RoutingServer/Soap" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

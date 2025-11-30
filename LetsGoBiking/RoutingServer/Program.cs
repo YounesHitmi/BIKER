@@ -15,7 +15,6 @@ namespace RoutingServer
         {
             Uri httpUrl = new Uri("http://localhost:8734/RoutingServer/");
 
-            //Create ServiceHost
             ServiceHost host = new ServiceHost(typeof(RoutingService), httpUrl);
 
             WebHttpBinding restBinding = new WebHttpBinding();
@@ -26,6 +25,8 @@ namespace RoutingServer
                 "");
 
             restEndpoint.Behaviors.Add(new WebHttpBehavior());
+
+            host.AddServiceEndpoint(typeof(IRoutingService), new BasicHttpBinding(), "Soap");
 
             //Enable metadata exchange
             ServiceMetadataBehavior smb = new ServiceMetadataBehavior();

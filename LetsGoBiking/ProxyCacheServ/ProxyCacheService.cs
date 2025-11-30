@@ -20,54 +20,34 @@ namespace ProxyCacheServer
         private const string JCDecauxApiKey = "5ea035e1b98780b596860a0e2c1f360bf3d4de8b";
         private const string ORS_API_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImUxYzlhZjQyMWI0YzRlYTY5NjQ3YmNhODgyN2NkM2I3IiwiaCI6Im11cm11cjY0In0="; //clé api ORS
 
-        public string GetStationsForContract(String contract)
+        public string GetAllStations()
         {
-            string cacheKey = "stations-" + contract.ToLower();
-
+            string cacheKey = "all-stations";
             string cachedResponse = _cache.Get(cacheKey) as string;
 
             if (cachedResponse != null)
             {
-                Console.WriteLine($"'{contract}' trouvé en cache.");
+                Console.WriteLine("Toutes les stations trouvées en cache.");
                 return cachedResponse;
             }
+            else
+            {
+                Console.WriteLine("Toutes les stations non trouvées en cache. Appel à JCDecaux API");
+                string apiResponse = CallAllStationsApi().Result;
 
-            Console.WriteLine($"'{contract}' non trouvé en cache. Appel à l'API JCDecaux.");
-
-            string apiResponse = CallJCDecauxApi(contract).Result;
-
-            if (!string.IsNullOrEmpty(apiResponse))
-            {  //Requête réussie --> on met en cache
-                CacheItemPolicy policy = new CacheItemPolicy
+                if (!string.IsNullOrEmpty(apiResponse)) //Mise en cache
                 {
-                    AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(5)
-                };
-                _cache.Set(cacheKey, apiResponse, policy);
+                    CacheItemPolicy policy = new CacheItemPolicy
+                    {
+                        AbsoluteExpiration = DateTimeOffset.Now.AddHours(1)
+                    };
+                    _cache.Set(cacheKey, apiResponse, policy);
+                }
+                return apiResponse;
             }
-
-            return apiResponse;
         }
+        
 
-        private async Task<string> CallJCDecauxApi(string contract)
-        {
-            try
-            {
-                string url = $"https://api.jcdecaux.com/vls/v1/stations?contract={contract}&apiKey={JCDecauxApiKey}";
-
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
-                HttpResponseMessage response = await httpClient.SendAsync(request); 
-
-                if (!response.IsSuccessStatusCode) return null;
-                return await response.Content.ReadAsStringAsync();
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine("\nException caught.\n");
-                Console.WriteLine("Message {0}: ", e.Message);
-                return null;
-            }
-
-        }
         public MyGeoCoordinate GetCoordinates(string address)
         {
             string cacheKey = "geocode-" + address.ToLower();
@@ -167,7 +147,6 @@ namespace ProxyCacheServer
         {
             try
             {
-                // Ces deux lignes pour avoir des '.' et pas des ',' dans les coord
                 string startCoord = $"{start.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{start.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
                 string endCoords = $"{end.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{end.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
 
@@ -216,7 +195,6 @@ namespace ProxyCacheServer
                     if (features.GetArrayLength() == 0) return null;
 
                     JsonElement firstRoute = features[0];
-                    //JsonElement properties = firstRoute.GetProperty("properties");
                     JsonElement summary = firstRoute.GetProperty("summary");
 
                     JsonElement geometryElement = firstRoute.GetProperty("geometry");
@@ -244,8 +222,6 @@ namespace ProxyCacheServer
                         }
                     }
 
-                    Console.WriteLine($"Instrcution du premier segment : {instructions[0]}\n");
-
                     return new RouteInfo
                     {
                         Duration = duration,
@@ -262,34 +238,6 @@ namespace ProxyCacheServer
                 return null;
             }
         }
-
-        public string GetAllStations()
-        {
-            string cacheKey = "all-stations";
-            string cachedResponse = _cache.Get(cacheKey) as string;
-            
-            if(cachedResponse != null)
-            {
-                Console.WriteLine("Toutes les stations trouvées en cache.");
-                return cachedResponse;
-            }
-            else
-            {
-                Console.WriteLine("Toutes les stations non trouvées en cache. Appel à JCDecaux API");
-                string apiResponse = CallAllStationsApi().Result;
-
-                if (!string.IsNullOrEmpty(apiResponse)) //Mise en cache
-                {
-                    CacheItemPolicy policy = new CacheItemPolicy
-                    {
-                        AbsoluteExpiration = DateTimeOffset.Now.AddHours(1)
-                    };
-                    _cache.Set(cacheKey, apiResponse, policy);
-                }
-                return apiResponse;
-            }
-        }
-
         private async Task<string> CallAllStationsApi()
         {
             try
@@ -309,68 +257,5 @@ namespace ProxyCacheServer
                 return null; 
             }
         }
-        public List<MyContract> GetContracts()
-        {
-            string cacheKey = "contracts";
-            List<MyContract> cachedContracts = _cache.Get(cacheKey) as List<MyContract>;
-            if(cachedContracts != null)
-            {
-                return cachedContracts;
-            }
-
-            string url = $"https://api.jcdecaux.com/vls/v3/contracts?apiKey={JCDecauxApiKey}";
-            HttpResponseMessage response = httpClient.GetAsync(url).Result;
-
-            if (!response.IsSuccessStatusCode) return null;
-            string json = response.Content.ReadAsStringAsync().Result;
-
-            JsonSerializerOptions options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            List<MyContract> contracts = JsonSerializer.Deserialize<List<MyContract>>(json, options);
-
-            _cache.Set(cacheKey, contracts, new CacheItemPolicy { AbsoluteExpiration = DateTimeOffset.Now.AddHours(1) });
-
-            return contracts;
-        }
-
-        public string GetCityFromCoordinates(MyGeoCoordinate coord)
-        {
-            try
-            {
-                string lat = coord.Latitude.ToString(CultureInfo.InvariantCulture);
-                string lon = coord.Longitude.ToString(CultureInfo.InvariantCulture);
-                Console.WriteLine($"lon:{coord.Latitude}, lat:{coord.Longitude}");
-                string url = $"https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat={lat}&lon={lon}";
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
-                request.Headers.Add("User-Agent", "Younes-H");
-                HttpResponseMessage response = httpClient.SendAsync(request).Result;
-
-                if (!response.IsSuccessStatusCode) return $"ICI SOAP: erreur HTTP -> Code {response.StatusCode}";
-
-                string json = response.Content.ReadAsStringAsync().Result;
-                if (string.IsNullOrEmpty(json)) return "ICI SOAP: réponse vide";
-
-                using (JsonDocument doc = JsonDocument.Parse(json))
-                {
-                    JsonElement root = doc.RootElement;
-                    if (root.TryGetProperty("address", out JsonElement address))
-                    {
-                        if (address.TryGetProperty("city", out JsonElement cityElem))
-                            return cityElem.GetString();
-                        if (address.TryGetProperty("town", out cityElem))
-                            return cityElem.GetString();
-                        if (address.TryGetProperty("village", out cityElem))
-                            return cityElem.GetString();
-                    }
-                }
-                return "ICI SOAP: pas de ville trouvée";
-            }
-            catch (Exception ex)
-            {
-                return "ICI SOAP: exception attrapée -> " + ex.Message;
-            }
-        }
-
-
-
     }
 }
